@@ -1,4 +1,4 @@
-Simple Demo Employee Application
+##Simple Demo Employee Application
 
 Application has following functions:
 - Get employee by ID
@@ -7,4 +7,5 @@ Application has following functions:
 - Delete employee
 
 JWT token is available from the following endpoint:
-/users/signin with username and password
+- /users/signin - get Jwt token (with username and password)
+- /users/signup - add user
