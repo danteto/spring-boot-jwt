@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class EmployeeRepositoryTest {
@@ -54,7 +53,7 @@ public class EmployeeRepositoryTest {
         employeeRepository.add(employeeDto);
         employeeRepository.delete(1L);
 
-        assertThrows(IllegalArgumentException.class, () -> employeeRepository.getById(1L));
+        assertThat(employeeRepository.getById(1L) == null);
     }
 
 

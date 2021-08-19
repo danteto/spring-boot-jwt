@@ -2,9 +2,11 @@ package com.dan.demo.service;
 
 import com.dan.demo.model.User;
 import com.dan.demo.repository.UserRepository;
+import com.dan.demo.security.CustomException;
 import com.dan.demo.security.JwtTokenProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -35,11 +37,10 @@ public class UserServiceImpl implements UserService {
     public String signin(String username, String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-            log.debug("LAAAAALALLLAAAALALAA");
             return jwtTokenProvider.createToken(username, userRepository.findByUsername(username).getRoles());
         } catch (AuthenticationException e) {
-            log.error("Invalid username/password supplied " + username + " : " + password);
-            throw new IllegalArgumentException("Invalid username/password supplied");
+            log.error("Invalid username/password supplied " + username);
+            throw new CustomException("Invalid username/password supplied", HttpStatus.FORBIDDEN);
         }
     }
 
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             return jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
         } else {
-            throw new IllegalArgumentException("Username is already in use");
+            throw new CustomException("Username is already in use", HttpStatus.FORBIDDEN);
         }
     }
 

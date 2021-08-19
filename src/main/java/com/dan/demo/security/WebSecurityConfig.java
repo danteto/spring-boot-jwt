@@ -47,9 +47,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Apply JWT
         http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
-
-        // Optional, if you want to test the API from a browser
-        // http.httpBasic();
     }
 
     @Override
@@ -65,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Un-secure H2 Database (for testing purposes, H2 console shouldn't be unprotected in production)
                 .and()
                 .ignoring()
-                .antMatchers("/h2-console/**/**");;
+                .antMatchers("/h2-console/**/**");
     }
 
     @Bean

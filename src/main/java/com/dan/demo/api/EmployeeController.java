@@ -5,10 +5,10 @@ import com.dan.demo.model.EmployeeDto;
 import com.dan.demo.service.EmployeeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/Employee")
@@ -25,11 +25,14 @@ public class EmployeeController {
     @ResponseBody
     @ApiOperation(value = "${EmployeeController.getById}")
     public EmployeeDto getById(@RequestParam long ID) {
-        try {
-            return employeeService.getById(ID);
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found", e);
-        }
+        return employeeService.getById(ID);
+    }
+
+    @GetMapping("/all")
+    @ResponseBody
+    @ApiOperation(value = "${EmployeeController.getAll}")
+    public List<EmployeeDto> getAll() {
+        return employeeService.getAll();
     }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})

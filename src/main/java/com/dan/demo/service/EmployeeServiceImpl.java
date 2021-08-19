@@ -4,6 +4,8 @@ import com.dan.demo.model.EmployeeDto;
 import com.dan.demo.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
@@ -15,6 +17,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDto getById(long id) {
         return employeeRepository.getById(id);
+    }
+
+    @Override
+    public List<EmployeeDto> getAll() {
+        return employeeRepository.getAll();
     }
 
     @Override

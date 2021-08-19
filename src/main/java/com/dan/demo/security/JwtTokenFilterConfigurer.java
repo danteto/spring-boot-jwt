@@ -1,6 +1,5 @@
 package com.dan.demo.security;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
